@@ -15,45 +15,94 @@ class Game
     @symbol
     @player1
     @player2
+    @p_choice
     @current_player
     @board = "    1       2      3    " + "\n" +
              "                         " + "\n" +
-             "A   #{@a1}  |   #{@a2}   |   #{@a3}    " + "\n" +
-             "  -----|------|------- " + "\n" +
+             "A   #{@a1}   |   #{@a2}   |   #{@a3}    " + "\n" +
+             "  ------|-------|------- " + "\n" +
              "B   #{@b1}   |   #{@b2}   |   #{@b3}    " + "\n" +
-             "  -----|------|------- " + "\n" +
+             "  ------|-------|------- " + "\n" +
              "C   #{@c1}   |   #{@c2}   |   #{@c3}    "
   end
 
   def get_choice
     check_round
     puts " #{@current_player} choose your move :"
-    p_choice = gets.chomp.downcase
-    # refactor this to check first if @a1!= " " and then assign values
-      case p_choice
-      when "a1" && @a1 == " "
-      @a1 = @symbol
-      when "a2" && @a2 == " "
-      @a2 = @symbol
-      when "a3" && @a3 == " "
-      @a3 = @symbol
-      when "b1" && @b1==" "
-      @b1 = @symbol
-      when "b2" && @b2==" "
-      @b2 = @symbol
-      when "b3" && @b3==" "
-      @b3 = @symbol
-      when "c1" && @c1==" "
-      @c1 = @symbol
-      when "c2" && @c2==" "
-      @c2 = @symbol
-      when "c3" && @c3==" "
-      @c3 = @symbol 
-      else
-      puts "Invalid input, choice must be like A1 or a1"
-      get_choice  
-      end
+    @p_choice = gets.chomp.downcase
+    validate
   end 
+
+  def validate
+    case @p_choice
+    when "a1"
+      if @a1 == " "
+      @a1 = @symbol
+      else
+        puts "Cell is full, pick another"
+        get_choice
+      end
+    when "a2"
+      if @a2 == " "
+        @a2 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    when "a3"
+      if @a3 == " "
+        @a3 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    when "b1"
+      if @b1 == " "
+        @b1 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    when "b2"
+      if @b2 == " "
+        @b2 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    when "b3"
+      if @b3 == " "
+        @b3 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    when "c1"
+      if @c1 == " "
+        @c1 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    when "c2"
+      if @c2 == " "
+        @c2 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    when "c3"
+      if @c3 == " "
+        @c3 = @symbol
+        else
+          puts "Cell is full, pick another"
+          get_choice
+        end
+    else
+     puts "Invalid choice, try A1 or a1"
+     get_choice  
+    end
+  end
 
   def check_round
     if @round.odd?
@@ -81,10 +130,10 @@ class Game
   def update_board
     @board = "    1       2      3    " + "\n" +
     "                         " + "\n" +
-    "A   #{@a1}  |   #{@a2}   |   #{@a3}    " + "\n" +
-    "  -----|------|------- " + "\n" +
+    "A   #{@a1}   |   #{@a2}   |   #{@a3}    " + "\n" +
+    "  ------|-------|------- " + "\n" +
     "B   #{@b1}   |   #{@b2}   |   #{@b3}    " + "\n" +
-    "  -----|------|------- " + "\n" +
+    "  ------|-------|------- " + "\n" +
     "C   #{@c1}   |   #{@c2}   |   #{@c3}    "
   end
 
@@ -115,9 +164,11 @@ class Game
 
   def play
     player_names
+    display_board
    until win? || end?
-     display_board
      get_choice
+     system("cls")
+     system("clear")
      display_board
      @round += 1
    end
